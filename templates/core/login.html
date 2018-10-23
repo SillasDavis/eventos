@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sistema de Eventos - Login</title>
+</head>
+<body class="hold-transition login-page">
+    <form action="{% url 'core:login' %}" method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <input type="submit" value="Login">
+    </form>
+</body>
+</html>

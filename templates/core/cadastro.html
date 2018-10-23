@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sistema de Eventos - Cadastro</title>
+</head>
+<body class="hold-transition register-page">
+    <form action="{% url 'core:cadastro' %}" method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <input value="Cadastrar" type="submit">
+    </form>
+</body>
+</html>

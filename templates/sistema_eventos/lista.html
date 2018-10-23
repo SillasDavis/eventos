@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sistema de Eventos - {{ object.nome }}</title>
+</head>
+<body>
+
+<h3>Lista de Inscritos (object.nome)</h3>
+<table border="1">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Nome</th>
+      <th>E-mail</th>
+      <th>CPF</th>
+      <th>Telefone</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for inscrito in object.inscricoes.all %}
+    <tr>
+      <th>{{ forloop.counter }}</th>
+      <td>{{ inscrito.first_name }} {{ inscrito.last_name }}</td>
+      <td>{{ inscrito.email }}</td>
+      <td>{{ inscrito.cpf }}</td>
+      <td>{{ inscrito.telefone }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+</body>
+</html>

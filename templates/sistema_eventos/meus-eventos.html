@@ -1,0 +1,37 @@
+{% extends '../base.html' %}
+
+{% block content %}
+        {% if mensagem %}
+            <div>
+                {{ mensagem }}
+            </div>
+        {% endif %}
+        <div>
+          {% if eventos|length != 0 %}
+            <table border="1">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Nome</th>
+                  <th>Data da Criação</th>
+                  <th>Ação</th>
+                </tr>
+              </thead>
+              <tbody>
+              {% for evento in eventos %}
+                <tr>
+                  <th>{{ forloop.counter }}</th>
+                  <td>{{ evento.nome }}</td>
+                  <td>{{ evento.created_at }}</td>
+                  <td><a href="{% url 'sistema_eventos:detalhes-evento' evento.pk %}">Visualizar Evento</a></td>
+                </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+          {% else %}
+            <div>
+                <h3>Nenhum evento encontrado</h3>
+            </div>
+          {% endif %}
+        </div>
+{% endblock %}

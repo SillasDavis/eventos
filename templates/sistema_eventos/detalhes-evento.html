@@ -1,0 +1,89 @@
+{% extends '../base.html' %}
+
+{% block content %}
+      <div style="float: right;">
+      {% if request.user.is_staff %}
+          <a href="{% url 'sistema_eventos:adicionar-minicurso' object.id %}">Adicionar Minicurso |</a>
+          <a href="{% url 'sistema_eventos:adicionar-palestra' object.id %}">| Adicionar Palestra |</a>
+          <a href="{% url 'sistema_eventos:adicionar-palestrante' %}">| Adicionar Palestrante</a>
+      {% endif %}
+      </div>
+
+    <h3>Detalhes do Evento ({{ object.nome }})</h3>
+
+    <div>
+        <h3>Minicursos</h3>
+          {% if object.lista_minicursos.all|length != 0 %}
+            <table border="1">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Palestrante</th>
+                  <th>Nome</th>
+                  <th>Data</th>
+                  <th>Horário</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody>
+              {% for minicurso in object.lista_minicursos.all %}
+                <tr>
+                  <th>{{ forloop.counter }}</th>
+                  <td>{{ minicurso.palestrante }}</td>
+                  <td>{{ minicurso.nome }}</td>
+                  <td>{{ minicurso.data }}</td>
+                  <td>{{ minicurso.hora }}</td>
+                  <td><a href="{% url 'sistema_eventos:inscrever-minicurso' minicurso.pk %}">Inscrever-se |</a>
+                      {% if request.user.is_staff %}
+                      <a href="{% url 'sistema_eventos:lista' minicurso.pk %}" target="_blank">| Gerar Lista</a>
+                      {% endif %}
+                  </td>
+                </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+          {% else %}
+            <div>
+                <h3>Nenhum minicurso cadastrado</h3>
+            </div>
+          {% endif %}
+    </div>
+
+          <div>
+              <h3>Palestras</h3>
+          </div>
+          {% if object.lista_palestras.all|length != 0 %}
+            <table border="1">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Palestrante</th>
+                  <th>Nome</th>
+                  <th>Data</th>
+                  <th>Horário</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody>
+              {% for palestra in object.lista_palestras.all %}
+                <tr>
+                  <th>{{ forloop.counter }}</th>
+                  <td>{{ palestra.palestrante }}</td>
+                  <td>{{ palestra.nome }}</td>
+                  <td>{{ palestra.data }}</td>
+                  <td>{{ palestra.hora }}</td>
+                  <td><a href="{% url 'sistema_eventos:inscrever-palestra' palestra.pk %}">Inscrever-se</a>
+                      {% if request.user.is_staff %}
+                      <a href="{% url 'sistema_eventos:lista' palestra.pk %}" target="_blank">| Gerar Lista</a>
+                      {% endif %}
+                  </td>
+                </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+          {% else %}
+            <div>
+                <h3>Nenhuma palestra encontrada</h3>
+            </div>
+          {% endif %}
+{% endblock %}

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sistema de Eventos</title>
+</head>
+<body>
+<div>
+    <h1>Sistema de Eventos do IFPB</h1>
+    <p>Bem-vindo(a), ao sistema de eventos do IFPB! Aqui você poderá criar e participar de eventos já existentes. Basta fazer login ou realizar seu cadastro.</p>
+    <ul>
+        <li><a href="{% url 'sistema_eventos:home' %}">Home</a></li>
+        {% if request.user.is_authenticated %}
+        {% if request.user.is_staff %}
+        <li><a href="{% url 'sistema_eventos:meus-eventos' %}">Meus Eventos</a></li>
+        <li><a href="{% url 'sistema_eventos:cadastrar-evento' %}">Cadastrar Evento</a></li>
+        {% else %}
+        <li><a href="{% url 'sistema_eventos:visualizar-eventos' %}">Visualizar Eventos</a></li>
+        {% endif %}
+        <li><a href="{% url 'core:logout' %}">Sair</a></li>
+        {% else %}
+        <li><a href="{% url 'core:login' %}">Login</a></li>
+        <li><a href="{% url 'core:cadastro' %}">Cadastro</a></li>
+        {% endif %}
+    </ul>
+    {% block content %}
+
+    {% endblock %}
+</div>
+<div style="text-align: center;">
+    <p>Sistema de Eventos &copy; 2018 - IFPB</p>
+</div>
+</body>
+</html>

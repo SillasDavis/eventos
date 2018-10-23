@@ -1,0 +1,32 @@
+{% extends '../base.html' %}
+
+{% block content %}
+
+    <h3>Adicionar Palestra</h3>
+
+    <form method="post">
+        {% csrf_token %}
+        <div>
+        <label>Palestrante</label>
+        <select name="palestrante">
+            {% for palestrante in palestrantes %}
+            <option value="{{ palestrante.pk }}">{{ palestrante.nome }}</option>
+            {% endfor %}
+        </select>
+        </div>
+        <div>
+            <label>Nome da Palestra</label>
+            <input name="nome" type="text">
+        </div>
+        <div>
+            <label>Data da Palestra</label>
+            <input name="data" type="date">
+        </div>
+        <div>
+            <label>Hora da Palestra</label>
+            <input name="hora" type="time">
+        </div>
+        <input type="submit" value="Adicionar">
+    </form>
+
+{% endblock %}
